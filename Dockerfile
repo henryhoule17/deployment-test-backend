@@ -4,18 +4,10 @@ FROM python:3.9-slim
 # Set working directory in the container
 WORKDIR /app
 
-# Install python-venv
-RUN apt-get update && apt-get install -y python3-venv
-
-# Create and activate virtual environment
-ENV VIRTUAL_ENV=/app/venv
-RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 # Copy requirements file
 COPY requirements.txt .
 
-# Install dependencies in virtual environment
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code
